@@ -8,7 +8,7 @@ function Viewprofile() {
     const [data, setdata] = useState(null)
 
     const getProfile=async()=>{
-        const response = await fetch(`http://localhost:5000/api/jobseeker/profile/${id}`,{
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/jobseeker/profile/${id}`,{
             method: 'POST',
             headers: {
 				'auth-token' : localStorage.getItem('token')

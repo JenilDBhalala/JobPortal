@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom";
 import Loading from './../Loading'
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 toast.configure()
 
@@ -10,7 +10,7 @@ function ViewProviderProfile() {
     const [data, setdata] = useState({})
 
     const getProfile = async () => {
-        const response = await fetch(`http://localhost:5000/api/jobprovider/profile/${id}`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/jobprovider/profile/${id}`, {
             method: 'POST',
             headers: {
                 'auth-token': localStorage.getItem('token')
@@ -24,7 +24,7 @@ function ViewProviderProfile() {
             }, 1000);
         }
         else {
-            toast.error("Some problem occured! Please Try Again!", {position: toast.POSITION.BOTTOM_RIGHT})
+            toast.error("Some problem occured! Please Try Again!", { position: toast.POSITION.BOTTOM_RIGHT })
         }
     }
 
@@ -33,10 +33,10 @@ function ViewProviderProfile() {
     }, [])
 
     return (
-        
+
         <div className="container">
             {
-                (!data.logo) && <Loading/> 
+                (!data.logo) && <Loading />
             }
             <div className="main-body">
                 <br />

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 function ApplicationStatus() {
     const [appstatus, setappstatus] = useState([])
     const getstatus = async () => {
-        const response = await fetch("http://localhost:5000/api/jobseeker/getapplicationstatus/", {
+        const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/jobseeker/getapplicationstatus/", {
             method: 'GET',
             headers: {
                 'auth-token': localStorage.getItem('token')
@@ -70,7 +70,7 @@ function ApplicationStatus() {
                                         <td>{obj.jobprovider.cname}</td>
                                         <td>{obj.job.title}</td>
                                         <td>{getdate(obj.application.applicationdate)}</td>
-                                        <td style={{color:(obj.application.rejected===1) ? "red" : ((obj.application.hired===1) ? "green" : "blue")}}>{checkApplicationStatus(obj.application)}</td>
+                                        <td style={{ color: (obj.application.rejected === 1) ? "red" : ((obj.application.hired === 1) ? "green" : "blue") }}>{checkApplicationStatus(obj.application)}</td>
                                     </tr>
                                 )
                             })

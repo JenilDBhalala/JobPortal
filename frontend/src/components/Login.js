@@ -3,7 +3,7 @@ import './Login.css';
 import './Jobseeker/home.css'
 import { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 toast.configure()
 
@@ -21,7 +21,7 @@ function Login(props) {
     const LoginNow = async (e) => {
         e.preventDefault();
 
-        const response = await fetch("http://localhost:5000/api/auth/login", {
+        const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/auth/login", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -38,7 +38,7 @@ function Login(props) {
             else
                 history.push('/jobseeker/profile');
             // props.showAlert("Login Successfully", "success");
-            toast.success("Logged-In Successfully.", {position: toast.POSITION.BOTTOM_RIGHT})
+            toast.success("Logged-In Successfully.", { position: toast.POSITION.BOTTOM_RIGHT })
             props.setrole(json.role)
             // props.setUser(json.user)
         }
@@ -46,7 +46,7 @@ function Login(props) {
             seterror(json.error);
             if (json.warning)
                 // props.showAlert(json.warning, "danger");
-                toast.error(json.warning, {position: toast.POSITION.BOTTOM_RIGHT})
+                toast.error(json.warning, { position: toast.POSITION.BOTTOM_RIGHT })
 
         }
     }
@@ -90,8 +90,8 @@ function Login(props) {
 
                                 <button className='btn btn-primary' style={{ width: "100px", height: "35px" }}>Login Now</button>
                                 {/* <Link className='float-right' to="/register">New Here?</Link> */}
-                                    <Link className='float-right' to="/forgotpassword">Forgot your password?</Link>
-                            </form>     
+                                <Link className='float-right' to="/forgotpassword">Forgot your password?</Link>
+                            </form>
                         </div>
                     </div>
                 </div>

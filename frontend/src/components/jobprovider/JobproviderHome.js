@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import verify from './verify.jpg'
 import CompleteProfile from "./CompleteProfile";
@@ -15,12 +15,12 @@ import InterviewBro from './../Jobseeker/Interview-bro.svg'
 function JobproviderHome() {
 	const [mode, setmode] = useState("");
 
-	const changeMode=(mode)=>{
+	const changeMode = (mode) => {
 		setmode(mode);
 	}
 
-	const checkUser = async() => {
-		const response = await fetch("http://localhost:5000/api/jobprovider/check", {
+	const checkUser = async () => {
+		const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/jobprovider/check", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -32,93 +32,93 @@ function JobproviderHome() {
 		if (json.success) {
 			setmode("complete");
 		}
-		else{
+		else {
 			setmode("incomplete")
 		}
 	};
 
-	useEffect(async() => {
+	useEffect(async () => {
 		await checkUser();
 	}, []);
-	
+
 	return (
 		<div>
 			<div>
 				{
-					(mode==="") && <Loading/>
+					(mode === "") && <Loading />
 				}
 				{
-					(mode==="incomplete") && <CompleteProfile changeMode={changeMode}/> 
+					(mode === "incomplete") && <CompleteProfile changeMode={changeMode} />
 				}
 				{
-					(mode==="complete") && <>
-					<div>
-						<div class="main-banner" id="top">
-							<video autoPlay muted loop id="bg-video">
-								<source src={video} type="video/mp4" />
-							</video>
-							<div class="video-overlay header-text">
-								<div class="caption">
-									<h6>choose more,choose right</h6>
-									<h2>Hire the Best <em>Employee</em> </h2>
-									<div>
-										<Link to="/job/create/" className="btn btn-info px-5"> Post Job</Link>
+					(mode === "complete") && <>
+						<div>
+							<div class="main-banner" id="top">
+								<video autoPlay muted loop id="bg-video">
+									<source src={video} type="video/mp4" />
+								</video>
+								<div class="video-overlay header-text">
+									<div class="caption">
+										<h6>choose more,choose right</h6>
+										<h2>Hire the Best <em>Employee</em> </h2>
+										<div>
+											<Link to="/job/create/" className="btn btn-info px-5"> Post Job</Link>
+										</div>
+										<br />
 									</div>
-									<br/>
 								</div>
 							</div>
 						</div>
-					</div>
-					<div>
-						<ShowJob/>
-					</div>
-					<section classname="mt-2" style={{backgroundColor:"#EEEEEE"}}>
-						<div className="container">
-						<div className="row">
-							<div className="col-5" style={{fontSize:"40px",color:"black",marginTop:"40px",marginBottom:"80px",fontFamily:"Alegreya Sans, sans-serif"}}>
-							<div className="text-center mb-5" style={{fontFamily:"Patua One,cursive"}}>
-								<span >How it Works?</span><br/>
-							</div>
-
-							<div className="row" >
-								<div className="col-4 ">
-								<img src={Profile} width="90" height="80"></img>
-								</div>
-								<div className="col-8 ">
-								<h1>Complete your company profile</h1>
-								<p>Add all details about your company</p>
-								</div>
-							</div>
-
-							<div className="row mt-5">
-								<div className="col-4 ">
-									<img src={searchJob} width="90" height="70"></img>
-								</div>
-								<div className="col-8 ">
-									<h1>Post the job</h1>
-									<p>Add all necessary details about job </p>
-								</div>
-								</div>
-								<div className="row mt-5">
-								<div className="col-4 ">
-									<img src={hireEmployee} width="90" height="70"></img>
-								</div>
-								<div className="col-8 ">
-									<h1>Hire Eligible Candidate</h1>
-									<p>Do hiring process step by step</p>
-								</div>
-								</div>
-							</div>
-							<div className="col-2"></div>
-							<div className="col-5" style={{fontSize:"40px",color:"black",marginTop:"40px",marginBottom:"80px",fontFamily:"cursive"}}>
-							<div className="text-center mb-5">
-								<img src={InterviewBro}/>
-							</div>
-							</div>
+						<div>
+							<ShowJob />
 						</div>
-						</div>  
-					</section><br/><br/>
-				</>
+						<section classname="mt-2" style={{ backgroundColor: "#EEEEEE" }}>
+							<div className="container">
+								<div className="row">
+									<div className="col-5" style={{ fontSize: "40px", color: "black", marginTop: "40px", marginBottom: "80px", fontFamily: "Alegreya Sans, sans-serif" }}>
+										<div className="text-center mb-5" style={{ fontFamily: "Patua One,cursive" }}>
+											<span >How it Works?</span><br />
+										</div>
+
+										<div className="row" >
+											<div className="col-4 ">
+												<img src={Profile} width="90" height="80"></img>
+											</div>
+											<div className="col-8 ">
+												<h1>Complete your company profile</h1>
+												<p>Add all details about your company</p>
+											</div>
+										</div>
+
+										<div className="row mt-5">
+											<div className="col-4 ">
+												<img src={searchJob} width="90" height="70"></img>
+											</div>
+											<div className="col-8 ">
+												<h1>Post the job</h1>
+												<p>Add all necessary details about job </p>
+											</div>
+										</div>
+										<div className="row mt-5">
+											<div className="col-4 ">
+												<img src={hireEmployee} width="90" height="70"></img>
+											</div>
+											<div className="col-8 ">
+												<h1>Hire Eligible Candidate</h1>
+												<p>Do hiring process step by step</p>
+											</div>
+										</div>
+									</div>
+									<div className="col-2"></div>
+									<div className="col-5" style={{ fontSize: "40px", color: "black", marginTop: "40px", marginBottom: "80px", fontFamily: "cursive" }}>
+										<div className="text-center mb-5">
+											<img src={InterviewBro} />
+										</div>
+									</div>
+								</div>
+							</div>
+						</section><br /><br />
+					</>
 				}
 			</div>
 		</div>

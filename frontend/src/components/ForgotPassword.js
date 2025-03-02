@@ -2,12 +2,12 @@ import React from 'react';
 import './Login.css';
 import './Jobseeker/home.css'
 import { useState } from 'react';
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 toast.configure()
 
 function ForgotPassword() {
-    const [credentials, setcredentials] = useState({email: ""});
+    const [credentials, setcredentials] = useState({ email: "" });
     const [error, seterror] = useState([]);
 
     const onChange = (e) => {
@@ -18,25 +18,25 @@ function ForgotPassword() {
     const forgotPassword = async (e) => {
         e.preventDefault();
         toast.info("Sending mail....", { position: toast.POSITION.BOTTOM_RIGHT })
-        const response = await fetch("http://localhost:5000/api/auth/requestPasswordReset", {
+        const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/auth/requestPasswordReset", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email: credentials.email, redirectUrl:"http://localhost:3000/resetpassword"})
+            body: JSON.stringify({ email: credentials.email, redirectUrl: "http://localhost:3000/resetpassword" })
         });
         const json = await response.json()
-        
-        if(json.success){
+
+        if (json.success) {
             // props.displayAlert(json.message, "success");
-            toast.success(json.message, {position: toast.POSITION.BOTTOM_RIGHT})
+            toast.success(json.message, { position: toast.POSITION.BOTTOM_RIGHT })
         }
-        else{
+        else {
             // props.showAlert(json.message,"danger");
-            toast.error(json.message, {position: toast.POSITION.BOTTOM_RIGHT})
+            toast.error(json.message, { position: toast.POSITION.BOTTOM_RIGHT })
         }
     }
-    
+
     return (
         <>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -49,7 +49,7 @@ function ForgotPassword() {
                     <div className="card shadow-lg p-3 bg-white rounded">
                         <div className="card-body" style={{ padding: "20px" }}>
                             <form onSubmit={forgotPassword}>
-                                 <div className="row">
+                                <div className="row">
                                     <div className="col-sm-3">
                                         <h3 className="mb-0 mx-4 mt-3" >Email</h3>
                                     </div>
@@ -58,7 +58,7 @@ function ForgotPassword() {
                                     </div>
                                 </div>
                                 <hr />
-                               
+
                                 <div className="form-group d-flex">
                                     {error.length !== 0 && <ul>{error.map((e) => {
                                         return <li key={e.msg}>{e.msg}</li>

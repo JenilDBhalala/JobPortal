@@ -23,7 +23,7 @@ function ResetPassword(props) {
         if (credentials.pass !== credentials.rpass)
             toast.warning("Both passwords should be same.", { position: toast.POSITION.BOTTOM_RIGHT })
         else {
-            const response = await fetch("http://localhost:5000/api/auth/resetPassword", {
+            const response = await fetch(process.env.REACT_APP_BACKEND_URL + "/api/auth/resetPassword", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
